@@ -12,10 +12,13 @@
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -30,9 +33,12 @@ public:
     QAction *action_6;
     QAction *action_8;
     QWidget *centralwidget;
+    QGridLayout *gridLayout;
+    QTextEdit *textEdit;
     QMenuBar *menubar;
     QMenu *menu;
     QStatusBar *statusbar;
+    QToolBar *toolBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -53,6 +59,13 @@ public:
         action_8->setObjectName("action_8");
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
+        gridLayout = new QGridLayout(centralwidget);
+        gridLayout->setObjectName("gridLayout");
+        textEdit = new QTextEdit(centralwidget);
+        textEdit->setObjectName("textEdit");
+
+        gridLayout->addWidget(textEdit, 0, 0, 1, 1);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -63,6 +76,9 @@ public:
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
         MainWindow->setStatusBar(statusbar);
+        toolBar = new QToolBar(MainWindow);
+        toolBar->setObjectName("toolBar");
+        MainWindow->addToolBar(Qt::ToolBarArea::TopToolBarArea, toolBar);
 
         menubar->addAction(menu->menuAction());
         menu->addAction(action);
@@ -73,6 +89,7 @@ public:
         menu->addAction(action_6);
         menu->addSeparator();
         menu->addAction(action_8);
+        toolBar->addAction(action_5);
 
         retranslateUi(MainWindow);
 
@@ -83,12 +100,31 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         action->setText(QCoreApplication::translate("MainWindow", "\346\226\260\345\242\236", nullptr));
+#if QT_CONFIG(shortcut)
+        action->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+T", nullptr));
+#endif // QT_CONFIG(shortcut)
         action_2->setText(QCoreApplication::translate("MainWindow", "\351\226\213\345\225\237", nullptr));
+#if QT_CONFIG(shortcut)
+        action_2->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+O", nullptr));
+#endif // QT_CONFIG(shortcut)
         action_3->setText(QCoreApplication::translate("MainWindow", "\351\227\234\351\226\211", nullptr));
+#if QT_CONFIG(shortcut)
+        action_3->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+Q", nullptr));
+#endif // QT_CONFIG(shortcut)
         action_5->setText(QCoreApplication::translate("MainWindow", "\345\204\262\345\255\230", nullptr));
+#if QT_CONFIG(shortcut)
+        action_5->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+S", nullptr));
+#endif // QT_CONFIG(shortcut)
         action_6->setText(QCoreApplication::translate("MainWindow", "\345\217\246\345\255\230", nullptr));
+#if QT_CONFIG(shortcut)
+        action_6->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+D", nullptr));
+#endif // QT_CONFIG(shortcut)
         action_8->setText(QCoreApplication::translate("MainWindow", "\351\200\200\345\207\272", nullptr));
+#if QT_CONFIG(shortcut)
+        action_8->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+Shift+Q", nullptr));
+#endif // QT_CONFIG(shortcut)
         menu->setTitle(QCoreApplication::translate("MainWindow", "\346\252\224\346\241\210", nullptr));
+        toolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "toolBar", nullptr));
     } // retranslateUi
 
 };
